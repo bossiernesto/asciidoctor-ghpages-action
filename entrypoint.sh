@@ -33,7 +33,7 @@ if [[ $HAS_SOURCE_DIR == true ]]; then
   git checkout -q --orphan gh-pages "$COMMIT_HASH" 1>/dev/null
   mv "$INPUT_SOURCE_DIR" /tmp/source
   #Ignores directories . and .git
-  find . -not -path './.git*' -not -name '.' -exec rm -rf {} \;
+  find . -not -path './.git*' -not -name '.' -not -name -path "./.${SOURCE_IGNORE_DIR}*" -exec rm -rf {} \;
   mv /tmp/source/* .
   git add .
 else

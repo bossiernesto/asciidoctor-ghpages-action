@@ -6,6 +6,10 @@ branding:
 description: 'Build AsciiDoc GitHub Pages: renames resulting README.html to index.html. Generates an ebook.pdf or Reveal.js slides'
 
 inputs:
+  source_ignore_dir:
+    description: 'Defines the source folder to ignore when setting a custom source dir.'
+    default: '.'
+    required: false
   source_dir:
     description: 'Defines the source root directory from where AsciiDoc files will be built and other containing files will be published to gh-pages.'
     default: '.'
@@ -50,6 +54,7 @@ runs:
   using: docker
   image: Dockerfile
   args:
+    - ${{ inputs.source_ignore_dir}}
     - ${{ inputs.source_dir }}
     - ${{ inputs.asciidoctor_params }}
     - ${{ inputs.adoc_file_ext }}
